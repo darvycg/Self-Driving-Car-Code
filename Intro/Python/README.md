@@ -20,3 +20,6 @@ After closing the initial plotting window, the program will simulate 100 steps a
 
 ## Future Improvements
 Add console input for the number of steps for the user to input
+
+# Disclaimer
+Not all code written in this repository was written by me. I added several methods to make the program work as provided by the Intro to Self Driving Car Nano-Degree Program.
