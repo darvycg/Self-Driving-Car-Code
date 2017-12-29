@@ -19,7 +19,7 @@ class Simulation(object):
 		self.colors = self.get_colors()
 		self.num_colors = len(self.colors)
 		if not start_pos:
-			self.true_pose = (self.height/2, self.width/2)
+			self.true_pose = (int(self.height/2), int(self.width/2))
 		else:
 			self.true_pose = start_pos
 		self.prev_pose = self.true_pose
@@ -43,7 +43,7 @@ class Simulation(object):
 		beliefs = deepcopy(self.beliefs)
 		new_beliefs = localizer.sense(color, self.grid, beliefs, self.p_hit, self.p_miss)
 		if not new_beliefs or len(new_beliefs) == 0:
-			print "NOTE! The robot doesn't have a working sense function at this point."
+			print ("NOTE! The robot doesn't have a working sense function at this point.")
 			self.beliefs = beliefs
 		else:
 			self.beliefs = new_beliefs
