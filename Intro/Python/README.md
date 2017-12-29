@@ -16,7 +16,7 @@ This will open a window with the beliefs before attempting to predict the locati
 
 After closing the initial plotting window, the program will simulate 100 steps and show a new plot that would look something like this (star will have changed locations):
 
-![alt text](https://raw.githubusercontent.com/darvycg/Self-Driving-Car-Code/master/Intro/Python/images/HistogramFilter/Last_Belief.png "Last Belief")
+![alt text](https://github.com/darvycg/Self-Driving-Car-Code/blob/master/Intro/Python/images/HistogramFilter/Last_Belief.png "Last Belief")
 
 ## Future Improvements
 Add console input for the number of steps for the user to input
