@@ -18,7 +18,7 @@
 using namespace std;
 
 /**
-    TODO - implement this function
+    Implemented by Darvy Ceron Gomez
 
     Initializes a grid of beliefs to a uniform distribution.
 
@@ -41,13 +41,23 @@ using namespace std;
 vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
     vector< vector <float> > newGrid;
 
-    // your code here
+    int height = grid.size();
+    int width = grid[0].size();
+
+    float area = height * width;
+    float belief_per_cell = 1.0f / area;
+
+    for(int i = 0; i < height; i++) {
+    	for(int j = 0; j < width; j++) {
+    		newGrid[i][j] = belief_per_cell;
+    	}
+    }
 
     return newGrid;
 }
 
 /**
-    TODO - implement this function
+    Implemented by Darvy Ceron Gomez
 
     Implements robot sensing by updating beliefs based on the
     color of a sensor measurement
@@ -90,15 +100,24 @@ vector< vector <float> > sense(char color,
     float p_miss)
 {
     vector< vector <float> > newGrid;
+    vector <float> summation;
 
-    // your code here
+    // Get unnormalized beliefs
+    for(int row = 0; row < beliefs.size(); row++) {
+    	vector<float> temp;
+    	for(int column = 0; column < beliefs[row].size(); column++) {
+    		bool hit = (color == grid[row][column]);
+    		temp.push_back(beliefs[row][column] * (hit * p_hit + (1-hit) * p_miss));
+    	}
+    	newGrid.push_back(temp);
+    }
 
     return normalize(newGrid);
 }
 
 
 /**
-    TODO - implement this function
+    Implemented by Darvy Ceron Gomez
 
     Implements robot motion by updating beliefs based on the
     intended dx and dy of the robot.
@@ -141,7 +160,25 @@ vector< vector <float> > move(int dy, int dx,
 
     vector < vector <float> > newGrid;
 
-    // your code here
+    int height = beliefs.size();
+    int width = beliefs[0].size();
+
+    // Initialize newGrid to zeros
+    for(int i = 0; i < height; i++) {
+    	vector<float> temp;
+    	for(int j = 0; j < width; j++) {
+    		temp.push_back(0.0f);
+    	}
+    	newGrid.push_back(temp);
+    }
+
+    for(int i = 0; i < height; i++) {
+    	for(int j = 0; j < width; j++) {
+    		int new_i = (i + dy) % height;
+    		int new_j = (j + dx) % width;
+    		newGrid[new_i][new_j] = newGrid[i][j];
+    	}
+    }
 
     return blur(newGrid, blurring);
 }
