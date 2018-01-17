@@ -4,7 +4,6 @@
     Purpose: helper functions for debugging when working
     with grids of floats and chars.
 */
-
 #include <vector>
 #include <iostream>
 using namespace std;
