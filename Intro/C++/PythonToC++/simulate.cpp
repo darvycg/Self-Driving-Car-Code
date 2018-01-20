@@ -79,13 +79,13 @@ Do that by first compiling this file and then
 running the output.
 */
 // int main() {
-
+//
 //     vector < vector <char> > map;
 //     vector <char> mapRow;
 //     int i, j, randInt;
 //     char color;
 //     std::vector<int> pose(2);
-
+//
 //     for (i = 0; i < 4; i++)
 //     {
 //         mapRow.clear();
@@ -107,7 +107,7 @@ running the output.
 //     // simulation = Simulation(map, 0.1, 0.9, pose);
 //     cout << "initialization success!\n";
 //     show_grid(map);
-
+//
 //     cout << "x, y = (" << simulation.true_pose[0] << ", " << simulation.true_pose[1] << ")" << endl;
 //     return 0;
 // }

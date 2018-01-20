@@ -47,10 +47,12 @@ vector< vector <float> > initialize_beliefs(vector< vector <char> > grid) {
     float area = height * width;
     float belief_per_cell = 1.0f / area;
 
-    for(int i = 0; i < height; i++) {
-    	for(int j = 0; j < width; j++) {
-    		newGrid[i][j] = belief_per_cell;
-    	}
+    for(int i = 0; i <  height; i++) {
+        vector<float> temp;
+        for(int j = 0; j < width; j++) {
+            temp.push_back(belief_per_cell);
+        }
+        newGrid.push_back(temp);
     }
 
     return newGrid;
@@ -174,8 +176,8 @@ vector< vector <float> > move(int dy, int dx,
 
     for(int i = 0; i < height; i++) {
     	for(int j = 0; j < width; j++) {
-    		int new_i = (i + dy) % height;
-    		int new_j = (j + dx) % width;
+    		int new_i = (i + dy) % (height-1);
+    		int new_j = (j + dx) % (width-1);
     		newGrid[new_i][new_j] = newGrid[i][j];
     	}
     }

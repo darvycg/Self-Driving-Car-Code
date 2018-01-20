@@ -15,7 +15,6 @@
 #include <cmath>
 #include <string>
 #include <fstream>
-#include "debugging_helpers.cpp"
 
 using namespace std;
 
@@ -33,25 +32,25 @@ using namespace std;
 */
 vector< vector<float> > normalize(vector< vector <float> > grid) {
 
-    vector< vector<float> > newGrid;
+//    vector< vector<float> > newGrid;
 
     float total = 0.0f;
 
     // get totals from the entire grid
-    for(int row = 0; row < newGrid.size(); row++) {
-    	for(int column = 0; column < newGrid[row].size(); column++) {
-    		total += newGrid[row][column];
+    for(int row = 0; row < grid.size(); row++) {
+    	for(int column = 0; column < grid[row].size(); column++) {
+    		total += grid[row][column];
     	}
     }
 
     // normalize each grid cell with the total
-    for(int row = 0; row < newGrid.size(); row++) {
-        	for(int column = 0; column < newGrid[row].size(); column++) {
-        		newGrid[row][column] = newGrid[row][column] / total;
+    for(int row = 0; row < grid.size(); row++) {
+        	for(int column = 0; column < grid[row].size(); column++) {
+        		grid[row][column] = grid[row][column] / total;
         	}
         }
 
-    return newGrid;
+    return grid;
 }
 
 /**
@@ -94,6 +93,14 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
     int height = grid.size();
     int width = grid[0].size();
 
+    for(int i = 0; i < height; i++) {
+        vector<float> temp;
+        for(int j = 0; j < width; j++) {
+            temp.push_back(0.0f);
+        }
+        newGrid.push_back(temp);
+    }
+
     float center_prob = 1.0f - blurring;
     float corner_prob = blurring / 12.0f;
     float adjacent_prob = blurring / 6.0f;
@@ -109,9 +116,9 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
     		float grid_val = grid[i][j];
     		for(int dx = -1; dx < 2; dx++) {
     			for(int dy = -1; dy < 2; dy++) {
-    				float mult = window[dx + 1][dy + 1];
-    				int new_i = (i + dy) % height;
-    				int new_j = (j + dx) % width;
+    				float mult = window[dx+1][dy+1];
+    				int new_i = (i + dy + height) % (height);
+    				int new_j = (j + dx + width) % (width);
     				newGrid[new_i][new_j] += mult * grid_val;
     			}
     		}
