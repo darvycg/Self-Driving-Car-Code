@@ -88,18 +88,10 @@ vector< vector<float> > normalize(vector< vector <float> > grid) {
 */
 vector < vector <float> > blur(vector < vector < float> > grid, float blurring) {
 
-    vector < vector <float> > newGrid;
-
     int height = grid.size();
     int width = grid[0].size();
 
-    for(int i = 0; i < height; i++) {
-        vector<float> temp;
-        for(int j = 0; j < width; j++) {
-            temp.push_back(0.0f);
-        }
-        newGrid.push_back(temp);
-    }
+    vector< vector<float> > newGrid(height, vector<float>(width, 0.0f));
 
     float center_prob = 1.0f - blurring;
     float corner_prob = blurring / 12.0f;
